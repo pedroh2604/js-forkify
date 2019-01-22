@@ -1,0 +1,20 @@
+// webpack tool that makes ajax calls, fetch doesn't work on all browsers
+import axios from 'axios';
+
+import {key} from '../config'; 
+
+// calls the api and does the search query
+export default class Search {
+	constructor(query) {
+		this.query = query;
+	}
+	async getResults() {
+		try {
+			const res = await axios(`https://www.food2fork.com/api/search?key=${key}&q=${this.query}`);
+			this.result = res.data.recipes;
+			// console.log(this.result);
+		} catch(error) {
+			alert(error);
+		}
+	}
+}
